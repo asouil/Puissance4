@@ -36,7 +36,7 @@ function nomDuJoueur(numjoueur){
 }
 
 function creerTableau(){
-	txt+="<table>";
+	txt="<table>";
 	for(var i=0;i<nblignes;i++){
 		txt+="<tr>";
 		for(var j=0;j<nbcolonnes;j++){
