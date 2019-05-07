@@ -51,6 +51,6 @@ function creerTableau(){
 		txt+="</tr>";
 	}
 	txt+="</table>";
-	document.getElementById(puissance4).innerHTML=texte;
+	document.getElementById("puissance4").innerHTML=txt;
 }
 
