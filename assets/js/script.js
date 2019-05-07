@@ -1,4 +1,4 @@
-var numjoueur=1;
+var joueur=1;
 var nbcolonnes=5
 var nblignes=5;
 var jeu=true;
@@ -17,7 +17,7 @@ function NewGame(){
 			plateau[i][j]=0;
 		}
 	}
-	var joueur=1;
+	joueur=1;
 	afficheTextAnnonce("Le jeu commence, c'est au tour du joueur "+nomDuJoueur(joueur));
 	jeu=true;
 	creerTableau();
@@ -40,7 +40,7 @@ function creerTableau(){
 	for(var i=0;i<nblignes;i++){
 		txt+="<tr>";
 		for(var j=0;j<nbcolonnes;j++){
-			txt+="<td onclick='detecteclic(j)' id='index"+i+"-index"+j+"'>";
+			txt+="<td onclick='detecteclic("+j+")' id='index"+i+"-index"+j+"'>";
 			if(plateau[i][j]==1){
 				txt+="<div class='joueur1'></div>";
 			}else if(plateau[i][j]==2){
