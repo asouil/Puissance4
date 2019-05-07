@@ -68,7 +68,7 @@ function detecteclic(int){
 			}else{
 				joueur=1;
 			}
-			afficheTextAnnonce("C'est au tour deu joueur "+nomDuJoueur(joueur));
+			afficheTextAnnonce("C'est au tour du joueur "+nomDuJoueur(joueur));
 		}
 	}	
 }
@@ -84,7 +84,7 @@ function verifPosition(int){
 }
 
 function poseJeton(int){
-	for(var i=nblignes-1;i>=0;i--){
+	for(var i=nblignes-1 ; i>=0 ; i--){
 		if(plateau[i][int]==0){
 			plateau[i][int]=joueur;
 			refreshTableau(i, int, joueur);
@@ -95,10 +95,12 @@ function poseJeton(int){
 
 function refreshTableau(x ,y ,i){
 	/* permet de chercher l'élément qui a l'id="x-y" et lui met en value */
-	document.getElementById(x+"-"+y).innerHTML="<div class='joueur'>"+i+"</div>";
+	document.getElementById(x+"-"+y).innerHTML="<div class='joueur"+i+"'></div>";
 }
 
 function puissance4(ligne, colonne, l, c){
 	console.log("valeur:"+ligne+" "+colonne+" / increment "+l+" "+c);
 	return false;
 }
+
+/* pour savoir si on a gagné, il va falloir regarder où on vient de mettre le pion, plus deux colonnes.*/
