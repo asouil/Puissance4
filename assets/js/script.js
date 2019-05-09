@@ -61,12 +61,12 @@ function detecteclic(int){
 		var verifEnd = puissance4(ligneEnCours, int, 0, 0);
 		if(verifEnd){
 			jeu=false;
-			afficheTextAnnonce("Le joueur "+nomDujoueur(joueur)+" a gagné la partie.");
+			afficheTextAnnonce("Le joueur "+nomDuJoueur(this.joueur)+" a gagné la partie.");
 		}
 		else{
 			/* condition binaire ? si ok : pas ok*/
 			joueur==1? joueur=2 : joueur=1;
-			afficheTextAnnonce("C'est au tour du joueur "+nomDuJoueur(joueur));
+			afficheTextAnnonce("C'est au tour du joueur "+ nomDuJoueur(joueur));
 		}
 	}	
 }
@@ -99,22 +99,30 @@ function puissance4(ligne, colonne, l, c){
 	
 	if (l==0 && c==0) {
 		/* on vérifie la ligne à l'horizontale */
-		var va =1 + Puissance4(ligne, colonne-1, 0, -1) + Puissance4(ligne, colonne+1, 0, 1);
+		var va =1 + puissance4(ligne, colonne-1, 0, -1) + puissance4(ligne, colonne+1, 0, 1);
 		/* on vérifie la colonne à la verticale */
-		var vb =1 + Puissance4(ligne-1, colonne, -1, 0) + Puissance4(ligne+1, colonne, 1, 0);
+		var vb =1 + puissance4(ligne-1, colonne, -1, 0) + puissance4(ligne+1, colonne, 1, 0);
 		/* On vérifie la diagonale droite (bas gauche haut droite) */
-		var vc =1 + Puissance4(ligne-1, colonne+1, -1, 1) + Puissance4(ligne+1, colonne-1, 1, -1);
+		var vc =1 + puissance4(ligne-1, colonne+1, -1, 1) + puissance4(ligne+1, colonne-1, 1, -1);
 		/* Puis la diagonale gauche */
-		var vd =1 + Puissance4(ligne-1, colonne-1, -1, -1) + Puissance4(ligne+1, colonne+1, 1, 1);
+		var vd =1 + puissance4(ligne-1, colonne-1, -1, -1) + puissance4(ligne+1, colonne+1, 1, 1);
 		/* si l'une des valeurs renvoie 4 c'est la fin de la partie  */
-		if((va||vb||vc||vd) ==4) return true : return false;
+		if(va==4 || vb==4 || vc==4 || vd ==4){
+			return true;
+			}else{
+				return false;
+			}
 	}
 	/* On ne calcule pas si on sort du tableau */
-	if(ligne < nblignes && ligne >= 0 && colonne < ncolonnes && colonne >= 0){
-		if(plateau[ligne][colonne]==joueur) return 1 + Puissance4(ligne+l, colonne+c, l ,c) : return 0;
+	if(ligne < nblignes && ligne >= 0 && colonne < nbcolonnes && colonne >= 0){
+		if(plateau[ligne][colonne]==joueur) {
+			return 1 + puissance4(ligne+l, colonne+c, l ,c);
+		}else {
+			return 0;
+		}
 	}
 	return 0;
-	//if(ligne > nblignes && ligne <= 0 && colonne > ncolonnes && colonne <= 0){
+	//if(ligne > nblignes && ligne <= 0 && colonne > nbcolonnes && colonne <= 0){
 	//	return false;
 	//}
 	
