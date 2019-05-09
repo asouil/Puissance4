@@ -1,5 +1,5 @@
 var joueur=1;
-var nbcolonnes=5
+var nbcolonnes=5;
 var nblignes=5;
 var jeu=true;
 var txt="";
@@ -13,6 +13,7 @@ NewGame();
 
 function NewGame(){
 	//this.nblignes indique le contexte courant (les variables disponibles) on peut donc noter this.nblignes ou nblignes.
+
 	for(var i=0; i<nblignes;i++){
 		for(var j=0;j<nbcolonnes;j++){
 			plateau[i][j]=0;
@@ -107,7 +108,7 @@ function puissance4(ligne, colonne, l, c){
 		/* Puis la diagonale gauche */
 		var vd =1 + puissance4(ligne-1, colonne-1, -1, -1) + puissance4(ligne+1, colonne+1, 1, 1);
 		/* si l'une des valeurs renvoie 4 c'est la fin de la partie  */
-		if(va==4 || vb==4 || vc==4 || vd ==4){
+		if(va>=4 || vb>=4 || vc>=4 || vd >=4){
 			return true;
 			}else{
 				return false;
