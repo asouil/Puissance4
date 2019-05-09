@@ -4,7 +4,7 @@ var nblignes=5;
 var jeu=true;
 var txt="";
 var plateau = [];
-
+// for(var i=0; i<nblignes;i++) plateau[i]=new Array();
 for(var i=0; i<nblignes;i++){
 	plateau[i]=[];
 }
@@ -12,6 +12,7 @@ for(var i=0; i<nblignes;i++){
 NewGame();
 
 function NewGame(){
+	//this.nblignes indique le contexte courant (les variables disponibles) on peut donc noter this.nblignes ou nblignes.
 	for(var i=0; i<nblignes;i++){
 		for(var j=0;j<nbcolonnes;j++){
 			plateau[i][j]=0;
@@ -63,23 +64,18 @@ function detecteclic(int){
 			afficheTextAnnonce("Le joueur "+nomDujoueur(joueur)+" a gagné la partie.");
 		}
 		else{
-			if(joueur==1){
-				joueur=2;
-			}else{
-				joueur=1;
-			}
+			/* condition binaire ? si ok : pas ok*/
+			joueur==1? joueur=2 : joueur=1;
 			afficheTextAnnonce("C'est au tour du joueur "+nomDuJoueur(joueur));
 		}
 	}	
 }
 
 function verifPosition(int){
-	if(plateau[0][int]==0){
-		return true;
-	}
-	else{
-		return false;
-	}
+	if(plateau[0][int]==0) return true;
+
+	else return false;
+
 	/* si la case du haut de la colonne est vide */
 }
 
@@ -100,7 +96,26 @@ function refreshTableau(x ,y ,i){
 
 function puissance4(ligne, colonne, l, c){
 	console.log("valeur:"+ligne+" "+colonne+" / increment "+l+" "+c);
-	return false;
+	
+	if (l==0 && c==0) {
+		/* on vérifie la ligne à l'horizontale */
+		var va =1 + Puissance4(ligne, colonne-1, 0, -1) + Puissance4(ligne, colonne+1, 0, 1);
+		/* on vérifie la colonne à la verticale */
+		var vb =1 + Puissance4(ligne-1, colonne, -1, 0) + Puissance4(ligne+1, colonne, 1, 0);
+		/* On vérifie la diagonale droite (bas gauche haut droite) */
+		var vc =1 + Puissance4(ligne-1, colonne+1, -1, 1) + Puissance4(ligne+1, colonne-1, 1, -1);
+		/* Puis la diagonale gauche */
+		var vd =1 + Puissance4(ligne-1, colonne-1, -1, -1) + Puissance4(ligne+1, colonne+1, 1, 1);
+		/* si l'une des valeurs renvoie 4 c'est la fin de la partie  */
+		if((va||vb||vc||vd) ==4) return true : return false;
+	}
+	/* On ne calcule pas si on sort du tableau */
+	if(ligne < nblignes && ligne >= 0 && colonne < ncolonnes && colonne >= 0){
+		if(plateau[ligne][colonne]==joueur) return 1 + Puissance4(ligne+l, colonne+c, l ,c) : return 0;
+	}
+	return 0;
+	//if(ligne > nblignes && ligne <= 0 && colonne > ncolonnes && colonne <= 0){
+	//	return false;
+	//}
+	
 }
-
-/* pour savoir si on a gagné, il va falloir regarder où on vient de mettre le pion, plus deux colonnes.*/
